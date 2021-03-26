@@ -5,6 +5,7 @@
 import math
 import numpy as np
 import pandas as pd
+import keras
 from sklearn.preprocessing import MinMaxScaler
 from keras.models import Sequential
 from keras.layers import Dense, LSTM
@@ -97,3 +98,34 @@ y_test = dataset[training_data_len:, :]
 
 for i in range(60, len(test_data)):
     x_test.append(test_data[i-60:i, 0])
+
+# Convert the data to a numpy array
+x_test = np.array(x_test)
+
+# Reshape the data
+x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
+
+# Get the models predicted price values
+predictions = model.predict(x_test)
+predictions = scaler.inverse_transform(predictions)
+
+# Get the root mean square error (RMSE)
+rmse = np.sqrt(np.mean(predictions - y_test)**2)
+print(rmse)
+
+# Plot the data
+train = data[:training_data_len]
+valid = data[training_data_len:]
+valid['Predictions'] = predictions
+
+# Visualize the data
+plt.figure(figsize=(16, 9))
+plt.title('Model')
+plt.xlabel('Date', fontsize=18)
+plt.ylabel('Close Price USDZAR', fontsize=18)
+plt.plot(train['Close'])
+plt.plot(valid[['Close', 'Predictions']])
+plt.legend(['Train', 'Validation', 'Predictions'], loc='upper right')
+# plt.show()
+
+print(valid)
