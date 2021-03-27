@@ -33,6 +33,7 @@ df = pd.read_csv('USDZAR60.csv')
 data = df.filter(['Close'])
 # Convert the dataframe to a numpy array
 dataset = data.values
+print(type(dataset))
 # get the number of rows to train the model on
 training_data_len = math.ceil(len(dataset) * .8)
 
@@ -111,7 +112,7 @@ predictions = scaler.inverse_transform(predictions)
 
 # Get the root mean square error (RMSE)
 rmse = np.sqrt(np.mean(predictions - y_test)**2)
-print(rmse)
+# print(rmse)
 
 # Plot the data
 train = data[:training_data_len]
@@ -128,4 +129,4 @@ plt.plot(valid[['Close', 'Predictions']])
 plt.legend(['Train', 'Validation', 'Predictions'], loc='upper right')
 # plt.show()
 
-print(valid)
+# print(valid)
