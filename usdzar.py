@@ -33,7 +33,7 @@ df = pd.read_csv('USDZAR60.csv')
 data = df.filter(['Close'])
 # Convert the dataframe to a numpy array
 dataset = data.values
-print(type(dataset))
+
 # get the number of rows to train the model on
 training_data_len = math.ceil(len(dataset) * .8)
 
@@ -43,7 +43,7 @@ training_data_len = math.ceil(len(dataset) * .8)
 scaler = MinMaxScaler(feature_range=(0, 1))
 scaled_data = scaler.fit_transform(dataset)
 
-# print(scaled_data)
+print(scaled_data)
 
 # Create the training data set
 # Create the scaled training data set
