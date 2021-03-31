@@ -127,6 +127,6 @@ plt.ylabel('Close Price USDZAR', fontsize=18)
 plt.plot(train['Close'])
 plt.plot(valid[['Close', 'Predictions']])
 plt.legend(['Train', 'Validation', 'Predictions'], loc='upper right')
-# plt.show()
+plt.show()
 
 # print(valid)
